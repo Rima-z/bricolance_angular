@@ -1,0 +1,8 @@
+<nav *ngIf="authService.isLoggedIn()" class="navbar">
+  <a routerLink="/dashboard">Accueil</a>
+  <a routerLink="/categories">Catégories</a>
+  <a routerLink="/services">Services</a>
+  <a routerLink="/profil">Profil</a>
+  <span class="user-name">{{ authService.currentUser?.nom }}</span>
+  <button (click)="logout()">Déconnexion</button>
+</nav> 

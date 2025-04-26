@@ -1,0 +1,117 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="Home Renovation">
+    </div>
+    
+    <nav class="menu-section">
+      <h3>ACCUEIL</h3>
+      <a routerLink="/accueil" class="menu-item">
+        <i class="fas fa-home"></i>
+        Accueil
+      </a>
+      <a routerLink="/categories" class="menu-item">
+        <i class="fas fa-th-large"></i>
+        Catégories
+      </a>
+      <a routerLink="/services" class="menu-item">
+        <i class="fas fa-tools"></i>
+        Services
+      </a>
+      <a routerLink="/profil" class="menu-item active">
+        <i class="fas fa-user"></i>
+        Profil
+      </a>
+    </nav>
+
+    <div class="menu-section">
+      <h3>AUTH</h3>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="notification-bar">
+      <i class="far fa-bell"></i>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Services Section -->
+      <section class="services-section">
+        <div class="section-header">
+          <h2>Mes Services</h2>
+          <button class="add-service-btn" (click)="ajouterService()">
+            <i class="fas fa-plus"></i>
+            Ajouter Un Service
+          </button>
+        </div>
+
+        <div class="services-content" *ngIf="!hasServices">
+          <div class="no-services">
+            <i class="fas fa-tools"></i>
+            <p>Aucun service enregistré</p>
+            <button class="add-first-service-btn" (click)="ajouterPremierService()">
+              <i class="fas fa-plus"></i>
+              Ajouter Mon Premier Service
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section class="profile-section">
+        <div class="section-header">
+          <h2>Mon Profil</h2>
+          <button class="modify-btn" (click)="modifierProfil()">Modifier</button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state" *ngIf="loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Chargement du profil...</p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state" *ngIf="error">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>{{ error }}</p>
+        </div>
+
+        <!-- Profile Info -->
+        <div class="profile-info" *ngIf="!loading && !error && user">
+          <div class="info-group">
+            <label>Nom</label>
+            <p>{{ user.nom }}</p>
+          </div>
+          <div class="info-group">
+            <label>Prénom</label>
+            <p>{{ user.prenom }}</p>
+          </div>
+          <div class="info-group">
+            <label>Email</label>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="info-group">
+            <label>Téléphone</label>
+            <p>{{ user.num_tlf }}</p>
+          </div>
+          <div class="info-group">
+            <label>Région</label>
+            <p>{{ user.region || 'Non spécifiée' }}</p>
+          </div>
+          <div class="info-group">
+            <label>Adresse</label>
+            <p>{{ user.adresse }}</p>
+          </div>
+          <div class="info-group role-group">
+            <label>Rôle</label>
+            <p [ngClass]="{'role-client': user.role === 'client', 'role-prestataire': user.role === 'prestataire'}">
+              {{ user.role === 'client' ? 'Client' : 'Prestataire' }}
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div> 

@@ -1,1 +1,150 @@
-<p>register works!</p>
+<div class="container">
+  <div class="auth-container">
+    <div class="logo-box">
+      <img src="./assets/logo.png" alt="Logo" style="width: 180px; height: auto; display: block; margin: 0 auto;" />
+    </div>
+
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input 
+            type="text" 
+            id="nom" 
+            [(ngModel)]="registerData.nom" 
+            name="nom" 
+            class="form-control" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input 
+            type="text" 
+            id="prenom" 
+            [(ngModel)]="registerData.prenom" 
+            name="prenom" 
+            class="form-control" 
+            required 
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="registerData.email" 
+          name="email" 
+          class="form-control" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="num_tlf">Numéro de téléphone</label>
+        <input 
+          type="tel" 
+          id="num_tlf" 
+          [(ngModel)]="registerData.num_tlf" 
+          name="num_tlf" 
+          class="form-control" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input 
+          type="text" 
+          id="adresse" 
+          [(ngModel)]="registerData.adresse" 
+          name="adresse" 
+          class="form-control" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="region">Région</label>
+        <input 
+          type="text" 
+          id="region" 
+          [(ngModel)]="registerData.region" 
+          name="region" 
+          class="form-control" 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="registerData.password" 
+          name="password" 
+          class="form-control" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation">Confirmer le mot de passe</label>
+        <input 
+          type="password" 
+          id="password_confirmation" 
+          [(ngModel)]="registerData.password_confirmation" 
+          name="password_confirmation" 
+          class="form-control" 
+          required 
+        />
+      </div>
+
+      <div class="form-group role-selection">
+        <label>Type de compte</label>
+        <div class="role-options">
+          <div class="role-option">
+            <input 
+              type="radio" 
+              id="client" 
+              [(ngModel)]="registerData.role" 
+              name="role" 
+              value="client" 
+              required 
+            />
+            <label for="client">Client</label>
+          </div>
+          <div class="role-option">
+            <input 
+              type="radio" 
+              id="prestataire" 
+              [(ngModel)]="registerData.role" 
+              name="role" 
+              value="prestataire" 
+            />
+            <label for="prestataire">Prestataire</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <div class="remember-me">
+          <input type="checkbox" id="terms" [(ngModel)]="registerData.acceptTerms" name="terms" required />
+          <label for="terms">J'accepte les conditions d'utilisation</label>
+        </div>
+      </div>
+
+      <button type="submit" class="sign-in-btn" [disabled]="!registerForm.valid">S'inscrire</button>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div class="existing-account-prompt">
+        Déjà un compte ? <a routerLink="/login" class="login-link">Se connecter</a>
+      </div>
+    </form>
+  </div>
+</div>

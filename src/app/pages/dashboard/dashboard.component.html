@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Tableau de bord</h1>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Chargement des données...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+        {{ error }}
+    </div>
+
+    <div *ngIf="!loading && !error" class="dashboard-content">
+        <div class="user-info" *ngIf="userData">
+            <h2>Bienvenue, {{ userData.name }}</h2>
+            <div class="user-details">
+                <p><strong>Email:</strong> {{ userData.email }}</p>
+                <!-- Add more user details as needed -->
+            </div>
+        </div>
+
+        <!-- Add more dashboard sections here -->
+    </div>
+</div>

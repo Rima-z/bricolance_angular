@@ -4,7 +4,6 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f5f5f5;
-  padding: 2rem 1rem;
 }
 
 .auth-container {
@@ -22,11 +21,21 @@
   align-items: center;
   width: 100%;
   margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-.modernize-logo {
-  height: 40px;
-  margin-bottom: 2rem;
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 0;
+
+  .logo {
+    width: 280px;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 .social-login-container {
@@ -93,26 +102,26 @@
 
 .form-group {
   margin-bottom: 1.5rem;
-}
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #333;
-  font-size: 0.9rem;
-}
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.9rem;
+  }
 
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-}
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
 
-.form-group input:focus {
-  outline: none;
-  border-color: #4285f4;
+    &:focus {
+      outline: none;
+      border-color: #4285f4;
+    }
+  }
 }
 
 .form-options {
@@ -120,34 +129,31 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-}
 
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+  .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
-.remember-me input[type="checkbox"] {
-  width: auto;
-  margin: 0;
-}
+    input[type="checkbox"] {
+      accent-color: #4285f4;
+    }
 
-.remember-me label {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0;
-  cursor: pointer;
-}
+    label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
 
-.forgot-password {
-  color: #4285f4;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
+  .forgot-password {
+    color: #4285f4;
+    text-decoration: none;
+    font-size: 0.9rem;
 
-.forgot-password:hover {
-  text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .sign-in-btn {
@@ -160,22 +166,10 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
-}
 
-.sign-in-btn:hover {
-  background-color: #3367d6;
-}
-
-.sign-in-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.error-message {
-  color: #d32f2f;
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  &:hover {
+    background-color: #3367d6;
+  }
 }
 
 .new-account-prompt {
@@ -183,14 +177,14 @@
   margin-top: 1.5rem;
   font-size: 0.9rem;
   color: #666;
-}
 
-.create-account-link {
-  color: #4285f4;
-  text-decoration: none;
-  margin-left: 0.25rem;
-}
+  .create-account-link {
+    color: #4285f4;
+    text-decoration: none;
+    margin-left: 0.25rem;
 
-.create-account-link:hover {
-  text-decoration: underline;
-}
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+} 

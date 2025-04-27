@@ -22,6 +22,11 @@ export const routes: Routes = [
       .then(m => m.ProfilComponent)
   },
   {
+    path: 'services',
+    loadComponent: () => import('./pages/services/services.component')
+      .then(m => m.ServicesComponent)
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

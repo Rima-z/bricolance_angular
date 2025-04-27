@@ -1,22 +1,4 @@
-.profil-container {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-  max-width: 400px;
-  margin: 2rem auto;
-}
-
-.profil-info p {
-  margin: 0.5rem 0;
-  color: #333;
-  font-size: 1rem;
-}
-
-.profil-info strong {
-  color: #4285f4;
-}
-
+/* Styles de base */
 .page-container {
   display: flex;
   min-height: 100vh;
@@ -133,6 +115,109 @@
   margin-right: 8px;
 }
 
+/* Services Grid Styles */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-image-container {
+  height: 160px;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-image-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.service-card-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.service-price {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.service-description {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.service-card-footer {
+  margin-top: auto;
+}
+
+.details-button {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.details-button:hover {
+  background-color: #4338ca;
+}
+
+/* No services message */
 .no-services {
   display: flex;
   flex-direction: column;
@@ -167,49 +252,6 @@
 
 .add-first-service-btn i {
   margin-right: 8px;
-}
-
-/* Profile Section Styles */
-.profile-section {
-  width: 400px;
-  min-width: 400px;
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  overflow: auto;
-}
-
-.modify-btn {
-  background-color: transparent;
-  color: #1890ff;
-  border: 1px solid #1890ff;
-  padding: 6px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.profile-info {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.info-group {
-  padding: 10px 0;
-}
-
-.info-group label {
-  display: block;
-  color: #8c8c8c;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.info-group p {
-  margin: 0;
-  color: #333;
-  font-size: 15px;
 }
 
 /* Loading State */
@@ -253,27 +295,3 @@
   color: #666;
   margin: 0;
 }
-
-.role-group {
-  margin-top: 10px;
-  padding-top: 15px;
-  border-top: 1px solid #f0f0f0;
-}
-
-.role-group p {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.role-client {
-  background-color: #e6f7ff;
-  color: #1890ff;
-}
-
-.role-prestataire {
-  background-color: #f6ffed;
-  color: #52c41a;
-} 

@@ -1,0 +1,90 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="./assets/logo.png" alt="Logo">
+    </div>
+    
+    <nav class="menu-section">
+      <h3>ACCUEIL</h3>
+      <a routerLink="/accueil" class="menu-item">
+        <i class="fas fa-home"></i>
+        Accueil
+      </a>
+      <a routerLink="/categories" class="menu-item">
+        <i class="fas fa-th-large"></i>
+        Catégories
+      </a>
+      <a routerLink="/services" class="menu-item active">
+        <i class="fas fa-tools"></i>
+        Services
+      </a>
+      <a routerLink="/profil" class="menu-item">
+        <i class="fas fa-user"></i>
+        Profil
+      </a>
+    </nav>  
+
+    <div class="menu-section">
+      <h3>AUTH</h3>
+      <!-- Ajoutez ici vos liens d'authentification -->
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="notification-bar">
+      <i class="far fa-bell"></i>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Services Section -->
+      <section class="services-section">
+        <div class="section-header">
+          <h2>Nos Services</h2>
+          <!-- Bouton supprimé car la fonction n'existe pas -->
+        </div>
+
+        <!-- Loading state -->
+        <div *ngIf="loading" class="loading-state">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Chargement des services...</p>
+        </div>
+
+        <!-- Error state -->
+        <div *ngIf="error" class="error-state">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>{{ error }}</p>
+        </div>
+
+        <!-- Services grid -->
+        <div *ngIf="!loading && !error" class="services-grid">
+          <div *ngFor="let service of services" class="service-card">
+            <div class="service-image-container">
+              <div class="service-image-placeholder">{{ service?.categorie?.nom?.charAt(0) || 'S' }}</div>
+            </div>
+            <div class="service-card-body">
+              <div class="service-header">
+                <h2 class="service-title">{{ service?.categorie?.nom || 'Catégorie non spécifiée' }}</h2>
+                <span class="service-price">{{ service?.prix || 0 }} €</span>
+              </div>
+              <p class="service-description">{{ service?.description || 'Aucune description disponible' }}</p>
+              <div class="service-card-footer">
+                <a *ngIf="service?.id" [routerLink]="['/services', service.id]" class="details-button">
+                  Voir détails
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No services message -->
+        <div *ngIf="!loading && !error && (!services || services.length === 0)" class="no-services">
+          <i class="fas fa-tools"></i>
+          <p>Aucun service disponible pour le moment.</p>
+          <!-- Bouton supprimé car la fonction n'existe pas -->
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

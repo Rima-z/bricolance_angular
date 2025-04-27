@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   register(data: RegisterData): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, data).pipe(
+    return this.http.post<RegisterResponse>(`${this.apiUrl}/auth/register`, data).pipe(
       tap((response) => {
         if (response && response.user) {
           this.setCurrentUser(response.user);
@@ -68,7 +68,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+    return this.http.post(`${this.apiUrl}/auth/login`, { email, password }).pipe(
       tap((res: any) => {
         if (res && res.user) {
           this.setCurrentUser(res.user);
@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
+    return this.http.post(`${this.apiUrl}/auth/logout`, {}).pipe(
       tap(() => {
         this.currentUser = null;
         localStorage.removeItem('token');
@@ -89,7 +89,7 @@ export class AuthService {
   }
 
   getProfile(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/me`).pipe(
+    return this.http.get(`${this.apiUrl}/auth/me`).pipe(
       tap((response: any) => {
         if (response.user) {
           const userData = {
@@ -103,7 +103,7 @@ export class AuthService {
   }
 
   updateProfile(profileData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile/update`, profileData).pipe(
+    return this.http.put(`${this.apiUrl}/auth/profile/update`, profileData).pipe(
       tap((response: any) => {
         if (response.user) {
           const userData = {

@@ -1,0 +1,90 @@
+<!-- src/app/pages/commentaire/commentaire.component.html -->
+<div class="page-container">
+    <!-- Sidebar identique à la page profil -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="./assets/logo.png" alt="Home Renovation">
+      </div>
+      
+      <nav class="menu-section">
+        <h3>ACCUEIL</h3>
+        <a routerLink="/accueil" class="menu-item">
+          <fa-icon [icon]="faHome"></fa-icon>
+          Accueil
+        </a>
+        <a routerLink="/categories" class="menu-item">
+          <fa-icon [icon]="faThLarge"></fa-icon>
+          Catégories
+        </a>
+        <a routerLink="/services" class="menu-item">
+          <fa-icon [icon]="faTools"></fa-icon>
+          Services
+        </a>
+        <a routerLink="/profil" class="menu-item">
+          <fa-icon [icon]="faUser"></fa-icon>
+          Profil
+        </a>
+        <a routerLink="/commentaires" class="menu-item active">
+          <fa-icon [icon]="faComments"></fa-icon>
+          Commentaires
+        </a>
+      </nav>  
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="notification-bar">
+        <fa-icon [icon]="faBell"></fa-icon>
+      </div>
+  
+      <div class="content-wrapper">
+        <!-- Commentaires Section -->
+        <section class="commentaires-section">
+          <div class="section-header">
+            <h2><b>Gestion des Commentaires</b></h2>
+          </div>
+  
+          <div *ngIf="chargementEnCours" class="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Chargement des commentaires...</p>
+          </div>
+  
+          <div *ngIf="!chargementEnCours && commentaires.length === 0" class="no-commentaires">
+            <i class="fas fa-comments"></i>
+            <p>Aucun commentaire à afficher</p>
+          </div>
+  
+          <div *ngFor="let commentaire of commentaires" class="commentaire-card {{getClasseEtat(commentaire.state)}}">
+            <div class="commentaire-header">
+              <span class="client">Client #{{commentaire.client_id}}</span>
+              <span class="service">Service #{{commentaire.service_id}}</span>
+              <span class="note">Note: {{commentaire.note}}/5</span>
+            </div>
+            
+            <div class="commentaire-content">
+              <p>{{commentaire.texte}}</p>
+              <div class="commentaire-date">{{commentaire.date | date:'dd/MM/yyyy'}}</div>
+            </div>
+  
+            <div class="commentaire-footer">
+              <span class="etat {{getClasseEtat(commentaire.state)}}">
+                {{getEtatCommentaire(commentaire.state)}}
+              </span>
+              
+              <div class="actions">
+                <button *ngIf="commentaire.state !== 1" (click)="approuver(commentaire.id)" class="btn-approuver">
+                  Approuver
+                </button>
+                <button *ngIf="commentaire.state !== -1" (click)="refuser(commentaire.id)" class="btn-refuser">
+                  Refuser
+                </button>
+                <button (click)="supprimer(commentaire.id)" class="btn-supprimer">
+                  Supprimer
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>

@@ -1,0 +1,141 @@
+/* Wrapper principal */
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Sidebar Styles (inchangés, optimisés) */
+  .sidebar {
+    width: 250px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .menu-section {
+    margin-bottom: 30px;
+  }
+  
+  .menu-section h3 {
+    color: #8c8c8c;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .menu-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .menu-item.active {
+    background-color: #e6f7ff;
+    color: #1890ff;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f4f6f8;
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .form-ajout {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .categorie-liste {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .categorie-liste li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .categorie-nom {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,58 @@
+<div class="app-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="./assets/logo.png" alt="Home Renovation">
+      </div>
+  
+      <nav class="menu-section">
+        <h3>ACCUEIL</h3>
+        <a routerLink="/accueil" class="menu-item">
+          <i class="fas fa-home"></i> Accueil
+        </a>
+        <a routerLink="/categories" class="menu-item active">
+          <i class="fas fa-th-large"></i> Catégories
+        </a>
+        <a routerLink="/services" class="menu-item">
+          <i class="fas fa-tools"></i> Services
+        </a>
+        <a routerLink="/profil" class="menu-item">
+          <i class="fas fa-user"></i> Profil
+        </a>
+        <a routerLink="//commentaires" class="menu-item ">
+          <i class="fas fa-comments"></i> Commentaires
+        </a>
+      </nav>
+    </aside>
+  
+    <!-- Contenu principal -->
+    <div class="main-content">
+      <div class="container">
+        <h2>Liste des Catégories</h2>
+  
+        <div class="form-ajout">
+          <input [(ngModel)]="nouvelleCategorie" placeholder="Nouvelle catégorie" />
+          <button (click)="ajouterCategorie()">Ajouter</button>
+        </div>
+  
+        <div *ngIf="loading">Chargement...</div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+  
+        <ul class="categorie-liste">
+          <li *ngFor="let cat of categories">
+            <span *ngIf="editingId !== cat.id" class="categorie-nom">{{ cat.nom }}</span>
+  
+            <input *ngIf="editingId === cat.id" [(ngModel)]="editValue" />
+  
+            <div class="actions">
+              <button *ngIf="editingId !== cat.id" (click)="commencerEdition(cat.id, cat.nom)">Modifier</button>
+              <button *ngIf="editingId === cat.id" (click)="validerEdition(cat.id)">Valider</button>
+              <button *ngIf="editingId === cat.id" (click)="annulerEdition()">Annuler</button>
+              <button (click)="supprimerCategorie(cat.id)">Supprimer</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

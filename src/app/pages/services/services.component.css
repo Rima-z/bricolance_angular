@@ -321,3 +321,99 @@
   flex-direction: column;
   gap: 0.75rem;
 }
+/* Styles pour les filtres */
+.filters-section {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-group {
+  flex: 1;
+  max-width: 300px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  font-size: 0.95rem;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #2c64bd;
+  box-shadow: 0 0 0 3px rgba(44, 100, 189, 0.1);
+}
+
+.filter-select[disabled] {
+  background-color: #f1f5f9;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Adaptation responsive */
+@media (max-width: 768px) {
+  .filters-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .filter-group {
+    max-width: 100%;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+}
+
+/* Animation de chargement */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Amélioration des couleurs */
+.service-price {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.details-button {
+  background-color: #2c64bd;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.details-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}

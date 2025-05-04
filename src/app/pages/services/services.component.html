@@ -23,12 +23,10 @@
         <i class="fas fa-user"></i>
         Profil
       </a>
-      <a routerLink="/commentaires" class="menu-item ">
+      <a routerLink="/commentaires" class="menu-item">
         <i class="fas fa-comments"></i> Commentaires
       </a>
-    </nav>  
-
-   
+    </nav>
   </aside>
 
   <!-- Main Content -->
@@ -41,40 +39,86 @@
       <!-- Services Section -->
       <section class="services-section">
         <div class="section-header">
-          <h2><b>les services disponibles</b></h2>
-          <!-- Bouton supprimé car la fonction n'existe pas -->
+          <h2><b>Les services disponibles</b></h2>
         </div>
 
-        <!-- Loading state -->
-        <div *ngIf="loading" class="loading-state">
+        <!-- Filtres -->
+        <div class="filters-section">
+          <div class="filter-group">
+            <label>Catégorie :</label>
+            <select 
+              [ngModel]="selectedCategory()" 
+              (ngModelChange)="onCategoryChange($event)"
+              class="filter-select"
+            >
+              <option [ngValue]="null">Toutes les catégories</option>
+              <option *ngFor="let cat of categories()" [ngValue]="cat.id">
+                {{ cat.nom }}
+              </option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Sous-catégorie :</label>
+            <select 
+              [ngModel]="selectedSubCategory()" 
+              (ngModelChange)="selectedSubCategory.set($event); loadServices()"
+              [disabled]="!selectedCategory()"
+              class="filter-select"
+            >
+              <option [ngValue]="null">Toutes les sous-catégories</option>
+              <option *ngFor="let sub of subCategories()" [ngValue]="sub.id">
+                {{ sub.nom }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- États de chargement -->
+        <div *ngIf="loading()" class="loading-state">
           <i class="fas fa-spinner fa-spin"></i>
           <p>Chargement des services...</p>
         </div>
 
-        <!-- Error state -->
-        <div *ngIf="error" class="error-state">
+        <!-- Message d'erreur -->
+        <div *ngIf="error()" class="error-state">
           <i class="fas fa-exclamation-circle"></i>
-          <p>{{ error }}</p>
+          <p>{{ error() }}</p>
         </div>
 
-        <!-- Services grid -->
-        <div *ngIf="!loading && !error" class="services-grid">
-          <div *ngFor="let service of services" class="service-card">
+        <!-- Liste des services -->
+        <div *ngIf="!loading() && !error()" class="services-grid">
+          <div 
+            *ngFor="let service of services()" 
+            class="service-card"
+          >
             <div class="service-image-container">
-              <div class="service-image-placeholder">{{ service?.categorie?.nom?.charAt(0) || 'S' }}</div>
+              <div class="service-image-placeholder">
+                {{ service?.categorie?.nom?.charAt(0) || 'S' }}
+              </div>
             </div>
             <div class="service-card-body">
               <div class="service-header">
-                <h2 class="service-title">{{ service?.categorie?.nom || 'Catégorie non spécifiée' }}</h2>
-                <span class="service-price">{{ service?.prix || 0 }} DT</span>
+                <h2 class="service-title">
+                  {{ service?.categorie?.nom || 'Catégorie non spécifiée' }}
+                </h2>
+                <span class="service-price">
+                  {{ formatPrice(service?.prix || 0) }}
+                </span>
               </div>
-              <p class="service-description">{{ service?.description || 'Aucune description disponible' }}</p>
+              <p class="service-description">
+                {{ service?.description || 'Aucune description disponible' }}
+              </p>
               <div class="service-prestataire">
                 <i class="fas fa-user-tie"></i>
                 {{ service?.prestataire?.client?.email || 'Email non disponible' }}
               </div>
               <div class="service-card-footer">
-                <a *ngIf="service?.id" [routerLink]="['/services', service.id]" class="details-button">
+                <a 
+                  *ngIf="service?.id" 
+                  [routerLink]="['/services', service.id]" 
+                  class="details-button"
+                >
                   Voir détails
                 </a>
               </div>
@@ -82,11 +126,13 @@
           </div>
         </div>
 
-        <!-- No services message -->
-        <div *ngIf="!loading && !error && (!services || services.length === 0)" class="no-services">
+        <!-- Aucun service disponible -->
+        <div 
+          *ngIf="!loading() && !error() && services().length === 0" 
+          class="no-services"
+        >
           <i class="fas fa-tools"></i>
-          <p>Aucun service disponible pour le moment.</p>
-          <!-- Bouton supprimé car la fonction n'existe pas -->
+          <p>Aucun service disponible pour les critères sélectionnés</p>
         </div>
       </section>
     </div>

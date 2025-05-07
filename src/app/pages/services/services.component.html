@@ -40,7 +40,122 @@
       <section class="services-section">
         <div class="section-header">
           <h2><b>Les services disponibles</b></h2>
+          <button class="add-service-button" (click)="showAddForm()">
+            <i class="fas fa-plus"></i> Ajouter un service
+          </button>
         </div>
+
+        <div class="modal-overlay" *ngIf="showAddFormModal">
+          <div class="modal-content">
+            <h3>Nouveau service</h3>
+            
+            <form [formGroup]="serviceForm" (ngSubmit)="submitService()">
+              <div class="form-group">
+                <label>Catégorie :</label>
+                <select 
+                  formControlName="categorie_id"
+                  (change)="onFormCategoryChange($any($event.target).value)"
+                >
+                  <option value="">Sélectionnez une catégorie</option>
+                  <option 
+                    *ngFor="let cat of categories()" 
+                    [value]="cat.id"
+                  >
+                    {{ cat.nom }}
+                  </option>
+                </select>
+                <div *ngIf="serviceForm.get('categorie_id')?.invalid && serviceForm.get('categorie_id')?.touched" 
+                     class="error-message">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Sous-catégorie :</label>
+                <select 
+                  formControlName="sous_categorie_id"
+                  [disabled]="!serviceForm.value.categorie_id"
+                >
+                  <option value="">Sélectionnez une sous-catégorie</option>
+                  <option 
+                    *ngFor="let sub of formSubCategories()" 
+                    [value]="sub.id"
+                  >
+                    {{ sub.nom }}
+                  </option>
+                </select>
+                <div *ngIf="serviceForm.get('sous_categorie_id')?.invalid && serviceForm.get('sous_categorie_id')?.touched" 
+                     class="error-message">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Prix (TND) :</label>
+                <input 
+                  type="number" 
+                  formControlName="prix" 
+                  step="0.01"
+                >
+                <div *ngIf="serviceForm.get('prix')?.errors?.['required'] && serviceForm.get('prix')?.touched" 
+                     class="error-message">
+                  Le prix est obligatoire
+                </div>
+                <div *ngIf="serviceForm.get('prix')?.errors?.['min'] && serviceForm.get('prix')?.touched" 
+                     class="error-message">
+                  Le prix doit être supérieur à 0
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Description :</label>
+                <textarea 
+                  formControlName="description" 
+                  rows="4"
+                ></textarea>
+                <div *ngIf="serviceForm.get('description')?.errors?.['required'] && serviceForm.get('description')?.touched" 
+                     class="error-message">
+                  La description est obligatoire
+                </div>
+                <div *ngIf="serviceForm.get('description')?.errors?.['minlength'] && serviceForm.get('description')?.touched" 
+                     class="error-message">
+                  Minimum 10 caractères
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Images du portfolio (URLs) :</label>
+                <div formArrayName="portfolio_images">
+                  <div *ngFor="let img of portfolioImages.controls; let i = index" class="image-input">
+                    <input 
+                      type="text" 
+                      [formControlName]="i"
+                      placeholder="URL de l'image"
+                    >
+                    <button type="button" class="remove-image" (click)="removeImage(i)">×</button>
+                  </div>
+                </div>
+                <button type="button" class="add-image" (click)="addImage()">
+                  <i class="fas fa-plus"></i> Ajouter une image
+                </button>
+              </div>
+
+              <div class="form-group">
+                <label>Description du portfolio :</label>
+                <textarea 
+                  formControlName="portfolio_description" 
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="cancel-btn" (click)="cancelAdd()">Annuler</button>
+                <button type="submit" class="submit-btn" [disabled]="serviceForm.invalid">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
 
         <!-- Filtres -->
         <div class="filters-section">

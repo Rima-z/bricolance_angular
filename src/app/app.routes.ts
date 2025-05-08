@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { CategoriesComponent } from './pages/categories/categories.component';
-import { CommentaireComponent } from './pages/commentaire/commentaire.component'; // Importer le composant
+import { CommentaireComponent } from './pages/commentaire/commentaire.component';
 
 export const routes: Routes = [
   {
@@ -32,10 +32,9 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoriesComponent
   },
-  // Ajoute la route pour les commentaires
   {
     path: 'commentaires',
-    component: CommentaireComponent  // Ajoute ici ton composant de commentaires
+    component: CommentaireComponent
   },
   {
     path: '',

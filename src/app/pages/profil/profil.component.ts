@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink, Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { EditProfileModalComponent } from '../../edit-profile-modal/edit-profile-modal.component';
 
 @Component({
   selector: 'app-profil',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink
-  ],
+  imports: [CommonModule, RouterLink, EditProfileModalComponent, FormsModule],
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
   user: any = null;
-  hasServices: boolean = false;
   loading: boolean = true;
   error: string | null = null;
+  showModal: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -25,24 +24,19 @@ export class ProfilComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadProfile();
+  }
+
+  loadProfile() {
     this.loading = true;
     this.error = null;
 
-    // D'abord, essayer d'utiliser les données en cache
-    if (this.authService.currentUser) {
-      this.user = this.authService.currentUser;
-      this.loading = false;
-    }
-
-    // Ensuite, rafraîchir les données depuis le serveur
     this.authService.getProfile().subscribe({
       next: (response) => {
-        if (response.user) {
-          this.user = {
-            ...response.user,
-            ...response.client
-          };
-        }
+        this.user = {
+          ...response.user,
+          ...response.client
+        };
         this.loading = false;
       },
       error: (err) => {
@@ -55,15 +49,18 @@ export class ProfilComponent implements OnInit {
     });
   }
 
-  ajouterService() {
-    this.router.navigate(['/ajouter-service']);
-  }
-
-  ajouterPremierService() {
-    this.router.navigate(['/ajouter-service']);
-  }
-
   modifierProfil() {
-    this.router.navigate(['/modifier-profil']);
+    this.showModal = true;
   }
-} 
+
+  onProfileSaved(updatedUser: any) {
+    // Mise à jour locale ET rechargement depuis le serveur
+    this.user = updatedUser;
+    this.showModal = false;
+    this.loadProfile(); // Recharger les données depuis le serveur
+  }
+
+  onModalClosed() {
+    this.showModal = false;
+  }
+}

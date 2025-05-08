@@ -2,7 +2,7 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">
-      <img src="./assets/logo.png" alt="Home Renovation">
+      <img src="./assets/logo.png" alt="Logo">
     </div>
     
     <nav class="menu-section">
@@ -15,7 +15,7 @@
         <i class="fas fa-th-large"></i>
         Catégories
       </a>
-      <a routerLink="/services" class="menu-item">
+      <a routerLink="/services" class="menu-item ">
         <i class="fas fa-tools"></i>
         Services
       </a>
@@ -23,76 +23,94 @@
         <i class="fas fa-user"></i>
         Profil
       </a>
-      <a routerLink="/commentaires" class="menu-item ">
+      <a routerLink="/commentaires" class="menu-item">
         <i class="fas fa-comments"></i> Commentaires
       </a>
-    </nav>  
-
-  
+    </nav>
   </aside>
+
 
   <!-- Main Content -->
   <main class="main-content">
-    <div class="notification-bar">
-      <i class="far fa-bell"></i>
-    </div>
+    <header class="notification-bar">
+      <button class="notification-btn" aria-label="Notifications">
+        <i class="far fa-bell"></i>
+      </button>
+    </header>
 
     <div class="content-wrapper">
-      <!-- Services Section -->
-      <section class="services-section">
-        <div class="section-header">
-          <h2>Mon Profil</h2>
-          <button class="modify-btn" (click)="modifierProfil()">Modifier</button>
-        </div>
+      <section class="profile-section">
+        <header class="section-header">
+          <h1>Mon Profil</h1>
+          <button type="button" class="modify-btn" (click)="modifierProfil()">
+            <i class="fas fa-edit"></i>
+            <span>Modifier</span>
+          </button>
+        </header>
 
         <!-- Loading State -->
-        <div class="loading-state" *ngIf="loading">
-          <i class="fas fa-spinner fa-spin"></i>
-          <p>Chargement du profil...</p>
+        <div *ngIf="loading" class="loading-state" aria-live="polite">
+          <div class="spinner-container">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Chargement du profil...</p>
+          </div>
         </div>
 
         <!-- Error State -->
-        <div class="error-state" *ngIf="error">
-          <i class="fas fa-exclamation-circle"></i>
-          <p>{{ error }}</p>
+        <div *ngIf="error" class="error-state" aria-live="assertive">
+          <div class="error-container">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>{{ error }}</p>
+          </div>
         </div>
 
         <!-- Profile Info -->
-        <div class="profile-info" *ngIf="!loading && !error && user">
-          <div class="info-group">
-            <label>Nom</label>
-            <p>{{ user.nom }}</p>
-          </div>
-          <div class="info-group">
-            <label>Prénom</label>
-            <p>{{ user.prenom }}</p>
-          </div>
-          <div class="info-group">
-            <label>Email</label>
-            <p>{{ user.email }}</p>
-          </div>
-          <div class="info-group">
-            <label>Téléphone</label>
-            <p>{{ user.num_tlf }}</p>
-          </div>
-          <div class="info-group">
-            <label>Région</label>
-            <p>{{ user.region || 'Non spécifiée' }}</p>
-          </div>
-          <div class="info-group">
-            <label>Adresse</label>
-            <p>{{ user.adresse }}</p>
-          </div>
-          <div class="info-group role-group">
-            <label>Rôle</label>
-            <p [ngClass]="{'role-client': user.role === 'client', 'role-prestataire': user.role === 'prestataire'}">
-              {{ user.role === 'client' ? 'Client' : 'Prestataire' }}
-            </p>
+        <div *ngIf="!loading && !error && user" class="profile-info">
+          <div class="profile-grid">
+            <div class="info-group">
+              <span class="info-label">Nom</span>
+              <p class="info-value">{{ user.nom }}</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Prénom</span>
+              <p class="info-value">{{ user.prenom }}</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Email</span>
+              <p class="info-value">{{ user.email }}</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Téléphone</span>
+              <p class="info-value">{{ user.num_tlf }}</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Région</span>
+              <p class="info-value">{{ user.region || 'Non spécifiée' }}</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Adresse</span>
+              <p class="info-value">{{ user.adresse }}</p>
+            </div>
+            <div class="info-group role-group">
+              <span class="info-label">Rôle</span>
+              <p class="info-value" [ngClass]="{
+                'role-client': user.role === 'client', 
+                'role-prestataire': user.role === 'prestataire'
+              }">
+                {{ user.role === 'client' ? 'Client' : 'Prestataire' }}
+              </p>
+            </div>
           </div>
         </div>
       </section>
-
-     
     </div>
   </main>
-</div> 
+
+  <!-- Modal de modification -->
+  <app-edit-profile-modal 
+    *ngIf="showModal"
+    [user]="user"
+    (save)="onProfileSaved($event)"
+    (close)="onModalClosed()"
+  ></app-edit-profile-modal>
+</div>

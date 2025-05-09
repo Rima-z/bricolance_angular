@@ -50,12 +50,14 @@ export class RegisterComponent {
         console.log('Inscription réussie', response);
         if (response && response.token) {
           this.authService.saveToken(response.token);
-          this.router.navigate(['/dashboard']);
+          // Ajouter un message de succès (vous pourriez utiliser un service de notifications)
+          alert('Inscription réussie ! Vous allez être redirigé vers la page de connexion.');
+          this.router.navigate(['/login']);
         }
       },
       error: (error: any) => {
         console.error('Erreur lors de l\'inscription', error);
-        // TODO: Ajouter un message d'erreur pour l'utilisateur
+        this.errorMessage = error.error.message || 'Une erreur est survenue lors de l\'inscription';
       }
     });
   }
